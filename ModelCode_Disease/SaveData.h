@@ -1,0 +1,52 @@
+#ifndef SAVEDATA_H
+#define SAVEDATA_H
+
+
+
+void OutputDataFile::SaveData(std::vector<DeficitVal> &DeficitsValues) {
+
+    std::ios::sync_with_stdio(false);
+	
+    for(const auto &x: DeficitsValues) {
+	
+        DeficitsOut << x.age << "\t" << x.id << "\t" << x.d << "\t" << x.indiv << "\n";
+    		    
+    }
+
+    DeficitsValues.clear();
+
+};
+
+void OutputDataFile::SaveData(std::vector<RatesVal> &RatesValues) {
+    
+    std::ios::sync_with_stdio(false);
+    
+    for(const auto &x: RatesValues) {
+        
+        RatesOut << x.age << "\t" << x.Rate << "\t" << x.d << "\t" << x.f << "\t" << x.indiv << "\n";
+        
+        //RatesOut << x.age << "\t" << x.id << "\t" << x.Rate << "\t" << x.d << "\t" << x.f << "\t" << x.indiv << "\n";
+        
+    }
+    
+    RatesValues.clear();
+    
+}
+
+
+void OutputDeathAges(const std::vector<double> &DeathAges, int OriginalN) {
+
+    std::string name = TempFolder() + "RawDeathAgeData" + "ID" + std::to_string(Parameters::TaskID) + SetRawName(OriginalN);
+    std::ofstream Output;
+    Output.open(name.c_str());
+
+    for(double x: DeathAges) Output << x << "\n";
+
+    Output.close();
+    
+}
+
+
+
+
+#endif
